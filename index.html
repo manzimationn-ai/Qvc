@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qatar Visa Center - Appointment Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #7a0000 0%, #a80000 50%, #7a0000 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(to right, #c40000, #8a0000);
+            color: white;
+            padding: 25px;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo i {
+            font-size: 40px;
+            color: #c40000;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Main Card */
+        .card {
+            background: linear-gradient(180deg, #ffffff, #f8f8f8);
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-content {
+            padding: 40px;
+        }
+
+        /* Form Sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #222;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            font-weight: 700;
+        }
+
+        /* Form Fields */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #c40000;
+            font-size: 18px;
+        }
+
+        .input-with-icon input, .input-with-icon select, .input-with-icon textarea {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            background-color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-with-icon textarea {
+            min-height: 120px;
+            resize: vertical;
+            padding-top: 20px;
+        }
+
+        .input-with-icon input:focus, .input-with-icon select:focus, .input-with-icon textarea:focus {
+            outline: none;
+            border-color: #c40000;
+            box-shadow: 0 0 0 3px rgba(196, 0, 0, 0.1);
+        }
+
+        .input-with-icon.vip-input {
+            background: linear-gradient(145deg, #fff9e6, #ffefcc);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #ffcc00;
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.2);
+        }
+
+        .input-with-icon.vip-input i {
+            color: #ff9900;
+        }
+
+        .vip-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #b88600;
+            font-weight: 700;
+        }
+
+        .vip-label i {
+            color: #ffcc00;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 16px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .btn-next {
+            background: linear-gradient(to right, #c40000, #a00000);
+            color: white;
+            box-shadow: 0 6px 15px rgba(196, 0, 0, 0.3);
+        }
+
+        .btn-next:hover {
+            background: linear-gradient(to right, #a80000, #8a0000);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 0, 0, 0.4);
+        }
+
+        .btn-prev {
+            background: #f0f0f0;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+
+        .btn-prev:hover {
+            background: #e5e5e5;
+            color: #333;
+        }
+
+        .btn-submit {
+            background: linear-gradient(to right, #28a745, #1e7e34);
+            color: white;
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(to right, #218838, #1c7430);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Email Support Button */
+        .email-support-btn {
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+            padding: 14px;
+            background: linear-gradient(to right, #ff6b35, #ff8c42);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .email-support-btn:hover {
+            background: linear-gradient(to right, #e55a2b, #e57a32);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Confirmation Section */
+        .confirmation {
+            text-align: center;
+            padding: 30px 20px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 50px;
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+            animation: popIn 0.6s ease 0.3s both;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .confirmation h2 {
+            font-size: 32px;
+            color: #28a745;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .confirmation p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .appointment-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+            border-left: 5px solid #c40000;
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+            width: 180px;
+        }
+
+        .detail-value {
+            color: #222;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .vip-badge {
+            background: linear-gradient(to right, #ffcc00, #ff9900);
+            color: #7a5a00;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        /* Loading Indicator */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #c40000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-info a {
+            color: #25D366;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* WhatsApp Floating Icon */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+            z-index: 100;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.7);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card-content {
+                padding: 25px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .detail-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .detail-label {
+                width: 100%;
+            }
+            
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loader"></div>
+            <div class="loading-text">Preparing your appointment... Please wait</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <div class="header-text">
+                    <h1>Qatar Visa Center</h1>
+                    <p>Medical & Visa Appointment Verification System</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card">
+            <div class="card-content">
+                <!-- Email Support Button -->
+                <a href="mailto:zoyabalochuk@gmail.com?subject=Qatar Visa Center Support&body=Hello, I need assistance with:" class="email-support-btn">
+                    <i class="fas fa-envelope"></i> Email Customer Support
+                </a>
+
+                <!-- Form Section 1: Personal Details -->
+                <div class="section active" id="section1">
+                    <h2 class="section-title">Personal Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="passportNumber">Passport Number *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-passport"></i>
+                            <input type="text" id="passportNumber" placeholder="Enter your passport number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullName" placeholder="Enter your full name as per passport" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="Enter your email address (optional)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nationality">Nationality *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-globe"></i>
+                            <select id="nationality" required>
+                                <option value="" disabled selected>Select your nationality</option>
+                                <option value="pakistan">Pakistan</option>
+                                <option value="india">India</option>
+                                <option value="bangladesh">Bangladesh</option>
+                                <option value="nepal">Nepal</option>
+                                <option value="sri-lanka">Sri Lanka</option>
+                                <option value="philippines">Philippines</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons">
+                        <button class="btn btn-next" onclick="nextSection()">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Section 2: Appointment Details -->
+                <div class="section" id="section2">
+                    <h2 class="section-title">Appointment Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="visaNumber">Visa Number *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-file-alt"></i>
+                            <input type="text" id="visaNumber" placeholder="Enter your visa number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="center">Visa Center *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-building"></i>
+                            <select id="center" required>
+                                <option value="" disabled selected>Select your visa center</option>
+                                <option value="islamabad">Islamabad Visa Center</option>
+                                <option value="karachi">Karachi Visa Center</option>
+                                <option value="lahore">Lahore Visa Center</option>
+                                <option value="peshawar">Peshawar Visa Center</option>
+                                <option value="multan">Multan Visa Center</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appointmentDate">Appointment Date *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="date" id="appointmentDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appointmentTime">Appointment Time *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-clock"></i>
+                            <select id="appointmentTime" required>
+                                <option value="" disabled selected>Select appointment time</option>
+                                <option value="09:00">09:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">01:00 PM</option>
+                                <option value="14:00">02:00 PM</option>
+                                <option value="15:00">03:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="vip-label">
+                            <i class="fas fa-crown"></i> VIP Lounge Service (Optional)
+                        </label>
+                        <div class="input-with-icon vip-input">
+                            <i class="fas fa-star"></i>
+                            <input type="text" id="vipCode" placeholder="Enter VIP service code if applicable">
+                        </div>
+                        <small style="color: #666; font-size: 14px; display: block; margin-top: 5px;">
+                            VIP service includes priority processing, lounge access, and dedicated assistance.
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additionalNotes">Additional Notes (Optional)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-sticky-note"></i>
+                            <textarea id="additionalNotes" placeholder="Any additional information or special requests"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons">
+                        <button class="btn btn-prev" onclick="prevSection()">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button class="btn btn-submit" onclick="submitForm()" id="submitBtn">
+                            Submit to WhatsApp <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Confirmation Section -->
+                <div class="section" id="section3">
+                    <div class="confirmation">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        
+                        <h2>Appointment Ready to Send!</h2>
+                        <p>Your appointment details are ready. Please click the WhatsApp button below to send your information to our support team.</p>
+                        
+                        <div class="appointment-details">
+                            <h3 style="color: #c40000; margin-bottom: 20px;">Appointment Summary</h3>
+                            
+                            <div class="detail-item">
+                                <div class="detail-label">Reference ID:</div>
+                                <div class="detail-value" id="conf-refid">QVC-2026-00123</div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-label">Passport Number:</div>
+                                <div class="detail-value" id="conf-passport">ABC123456</div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-label">Full Name:</div>
+                                <div class="detail-value" id="conf-name">John Doe</div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-label">Appointment Date:</div>
+                                <div class="detail-value" id="conf-date">15 October 2023</div>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <div class="detail-label">Visa Center:</div>
+                                <div class="detail-value" id="conf-center">Islamabad Visa Center</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <p><strong>Next Steps:</strong></p>
+                            <p>1. Click the WhatsApp button below to send your appointment</p>
+                            <p>2. Keep your passport and documents ready</p>
+                            <p>3. Arrive 15 minutes before your appointment time</p>
+                            
+                            <div style="margin-top: 20px;">
+                                <button class="btn btn-submit" onclick="openWhatsApp()" style="max-width: 300px; margin: 0 auto;">
+                                    <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                                </button>
+                            </div>
+                            
+                            <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                                Or contact us directly: 
+                                <a href="https://wa.me/923321557254" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> +92 33 2155 7254
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>© 2026 Qatar Visa Center. All rights reserved.</p>
+                <p>This is an official appointment verification system of the Qatar Visa Center.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/923321557254" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Current section tracker
+        let currentSection = 1;
+        const totalSections = 3;
+        
+        // Store form data globally
+        let formData = {};
+        
+        // Function to move to the next section
+        function nextSection() {
+            // Validate current section before proceeding
+            if (currentSection === 1 && !validateSection1()) {
+                return;
+            }
+            
+            // Hide current section
+            document.getElementById(`section${currentSection}`).classList.remove('active');
+            
+            // Update current section
+            currentSection++;
+            
+            // Show next section
+            document.getElementById(`section${currentSection}`).classList.add('active');
+        }
+        
+        // Function to move to the previous section
+        function prevSection() {
+            // Hide current section
+            document.getElementById(`section${currentSection}`).classList.remove('active');
+            
+            // Update current section
+            currentSection--;
+            
+            // Show previous section
+            document.getElementById(`section${currentSection}`).classList.add('active');
+        }
+        
+        // Validate section 1 inputs
+        function validateSection1() {
+            const passport = document.getElementById('passportNumber').value.trim();
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const nationality = document.getElementById('nationality').value;
+            
+            if (!passport) {
+                alert('Please enter your passport number.');
+                document.getElementById('passportNumber').focus();
+                return false;
+            }
+            
+            if (!fullName) {
+                alert('Please enter your full name.');
+                document.getElementById('fullName').focus();
+                return false;
+            }
+            
+            if (!phone) {
+                alert('Please enter your phone number.');
+                document.getElementById('phone').focus();
+                return false;
+            }
+            
+            if (!nationality) {
+                alert('Please select your nationality.');
+                document.getElementById('nationality').focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // Generate reference ID
+        function generateReferenceId() {
+            const timestamp = new Date().getTime();
+            const random = Math.floor(Math.random() * 1000);
+            return `QVC-${new Date().getFullYear()}-${timestamp.toString().slice(-5)}${random}`;
+        }
+        
+        // Submit form function
+        function submitForm() {
+            // Validate section 2 inputs
+            const visaNumber = document.getElementById('visaNumber').value.trim();
+            const center = document.getElementById('center').value;
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const appointmentTime = document.getElementById('appointmentTime').value;
+            
+            if (!visaNumber) {
+                alert('Please enter your visa number.');
+                document.getElementById('visaNumber').focus();
+                return;
+            }
+            
+            if (!center) {
+                alert('Please select a visa center.');
+                document.getElementById('center').focus();
+                return;
+            }
+            
+            if (!appointmentDate) {
+                alert('Please select an appointment date.');
+                document.getElementById('appointmentDate').focus();
+                return;
+            }
+            
+            if (!appointmentTime) {
+                alert('Please select an appointment time.');
+                document.getElementById('appointmentTime').focus();
+                return;
+            }
+            
+            // Get all form values
+            formData = {
+                referenceId: generateReferenceId(),
+                passport: document.getElementById('passportNumber').value.trim(),
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim() || "Not Provided",
+                phone: document.getElementById('phone').value.trim(),
+                nationality: document.getElementById('nationality').options[document.getElementById('nationality').selectedIndex].text,
+                visaNumber: visaNumber,
+                center: document.getElementById('center').options[document.getElementById('center').selectedIndex].text,
+                appointmentDate: appointmentDate,
+                appointmentTime: appointmentTime,
+                vipCode: document.getElementById('vipCode').value.trim() || "Not Applicable",
+                additionalNotes: document.getElementById('additionalNotes').value.trim() || "None",
+                submissionTime: new Date().toLocaleString()
+            };
+            
+            // Show loading overlay
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            document.getElementById('submitBtn').disabled = true;
+            
+            // Update confirmation section
+            updateConfirmationSection(formData);
+            
+            // Move to confirmation section after delay
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                document.getElementById(`section${currentSection}`).classList.remove('active');
+                currentSection = 3;
+                document.getElementById(`section${currentSection}`).classList.add('active');
+            }, 1500);
+        }
+        
+        // Open WhatsApp with formatted message
+        function openWhatsApp() {
+            const whatsappNumber = "923321557254";
+            
+            // Format date for display
+            const dateObj = new Date(formData.appointmentDate);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = dateObj.toLocaleDateString('en-US', options);
+            
+            // Create WhatsApp message
+            const message = `*NEW QATAR VISA APPOINTMENT REQUEST*\n\n` +
+                           `*Reference ID:* ${formData.referenceId}\n` +
+                           `*Passport Number:* ${formData.passport}\n` +
+                           `*Full Name:* ${formData.fullName}\n` +
+                           `*Phone Number:* ${formData.phone}\n` +
+                           `*Email:* ${formData.email}\n` +
+                           `*Nationality:* ${formData.nationality}\n` +
+                           `*Visa Number:* ${formData.visaNumber}\n` +
+                           `*Visa Center:* ${formData.center}\n` +
+                           `*Appointment Date:* ${formattedDate}\n` +
+                           `*Appointment Time:* ${formData.appointmentTime}\n` +
+                           `*VIP Service:* ${formData.vipCode}\n` +
+                           `*Additional Notes:* ${formData.additionalNotes}\n` +
+                           `*Submitted On:* ${formData.submissionTime}\n\n` +
+                           `_Please confirm this appointment at your earliest convenience._`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Update confirmation section
+        function updateConfirmationSection(formData) {
+            // Format date for display
+            const dateObj = new Date(formData.appointmentDate);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = dateObj.toLocaleDateString('en-US', options);
+            
+            // Update confirmation details
+            document.getElementById('conf-refid').textContent = formData.referenceId;
+            document.getElementById('conf-passport').textContent = formData.passport;
+            document.getElementById('conf-name').textContent = formData.fullName;
+            document.getElementById('conf-date').textContent = `${formattedDate} at ${formData.appointmentTime}`;
+            document.getElementById('conf-center').textContent = formData.center;
+        }
+        
+        // Set minimum date for appointment to tomorrow
+        window.onload = function() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            // Format to YYYY-MM-DD
+            const minDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = minDate;
+            
+            // Set default date to 3 days from now
+            const defaultDate = new Date(today);
+            defaultDate.setDate(defaultDate.getDate() + 3);
+            const defaultDateStr = defaultDate.toISOString().split('T')[0];
+            document.getElementById('appointmentDate').value = defaultDateStr;
+            
+            // Set default time to 10:00 AM
+            document.getElementById('appointmentTime').value = "10:00";
+        };
+    </script>
+</body>
+</html>
